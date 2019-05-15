@@ -7,7 +7,9 @@ import numpy as np
 from PIL import Image
 from glob import glob
 image_files = glob('./test_images/*.*')
-
+import  sys
+import importlib
+importlib.reload(sys)
 
 if __name__ == '__main__':
     result_dir = './test_result'

@@ -1,0 +1,27 @@
+FROM python:3.6
+MAINTAINER Jojo "zzc185@foxmail.com"
+
+ENV OCR_ROOT_DIR /root/cn_ocr
+# cpu or gpu
+ARG envmode=cpu
+RUN mkdir -p ${OCR_ROOT_DIR}
+
+RUN apt update \
+    && apt install -y openssh-server git vim
+RUN echo "root:123456" |chpasswd
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \
+    && echo "/etc/init.d/ssh start" > startssh.sh \
+    && echo "/bin/bash" >> startssh.sh \
+    && chmod +x startssh.sh
+RUN pip install Pillow
+WORKDIR ${OCR_ROOT_DIR}
+RUN git clone https://github.com/Jojozzc/chinese_ocr
+WORKDIR chinese_ocr
+RUN chmod +x setup.sh \
+    && /bin/bash setup.sh --mode ${envmode}
+
+
+
+EXPOSE 22
+ENTRYPOINT ["/bin/bash", "${OCR_ROOT_DIR}/startssh.sh"]
+CMD ["/bin/bash"]

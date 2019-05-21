@@ -121,7 +121,7 @@ class SolverWrapper(object):
                    'weights from {:s}').format(self.pretrained_model))
                 self.net.load(self.pretrained_model, sess, True)
             except:
-                raise 'Check your pretrained model {:s}'.format(self.pretrained_model)
+                raise Exception('Check your pretrained model {:s}'.format(self.pretrained_model))
 
         # resuming a trainer
         if restore:

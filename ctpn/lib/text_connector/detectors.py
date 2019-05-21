@@ -37,7 +37,7 @@ class TextDetector:
         keep_inds=self.filter_boxes(text_recs)
         text_lines=text_recs[keep_inds]
         
-        # 对lines做nms
+        # 对lines做nms非极大值抑制
         if text_lines.shape[0] != 0:
             keep_inds=nms(text_lines, TextLineCfg.TEXT_LINE_NMS_THRESH)
             text_lines=text_lines[keep_inds]

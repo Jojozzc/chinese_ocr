@@ -1,6 +1,7 @@
 import os
 import os.path as osp
 import PIL
+from PIL import Image
 import numpy as np
 import scipy.sparse
 
@@ -80,7 +81,7 @@ class imdb(object):
         raise NotImplementedError
 
     def _get_widths(self):
-      return [PIL.Image.open(self.image_path_at(i)).size[0]
+      return [Image.open(self.image_path_at(i)).size[0]
               for i in range(self.num_images)]
 
     def append_flipped_images(self):

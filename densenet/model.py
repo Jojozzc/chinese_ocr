@@ -13,6 +13,7 @@ from . import densenet
 
 reload(densenet)
 
+# 字符集
 characters = keys.alphabet[:]
 characters = characters[1:] + u'卍'
 nclass = len(characters)

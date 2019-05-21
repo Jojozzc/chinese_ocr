@@ -5,14 +5,14 @@ import os.path
 sys.path.append(os.getcwd())
 this_dir = os.path.dirname(__file__)
 
-from lib.fast_rcnn.train import get_training_roidb, train_net
-from lib.fast_rcnn.config import cfg_from_file, get_output_dir, get_log_dir
-from lib.datasets.factory import get_imdb
-from lib.networks.factory import get_network
-from lib.fast_rcnn.config import cfg
+from ctpn.lib.fast_rcnn.train import get_training_roidb, train_net
+from ctpn.lib.fast_rcnn.config import cfg_from_file, get_output_dir, get_log_dir
+from ctpn.lib.datasets.factory import get_imdb
+from ctpn.lib.networks.factory import get_network
+from ctpn.lib.fast_rcnn.config import cfg
 
 if __name__ == '__main__':
-    cfg_from_file('ctpn/text.yml')
+    cfg_from_file('text.yml')
     print('Using config:')
     pprint.pprint(cfg)
     imdb = get_imdb('voc_2007_trainval')
@@ -32,6 +32,6 @@ if __name__ == '__main__':
     train_net(network, imdb, roidb,
               output_dir=output_dir,
               log_dir=log_dir,
-              pretrained_model='data/pretrain_model/VGG_imagenet.npy',
+              pretrained_model=os.path.join('../data/pretrain_model/VGG_imagenet.npy'),
               max_iters=int(cfg.TRAIN.max_steps),
               restore=bool(int(cfg.TRAIN.restore)))

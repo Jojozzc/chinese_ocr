@@ -1,10 +1,10 @@
-import os
+import os, sys
 import numpy as np
 import math
 import cv2 as cv
 
-path = '/media/D/code/OCR/text-detection-ctpn/data/mlt_english+chinese/image'
-gt_path = '/media/D/code/OCR/text-detection-ctpn/data/mlt_english+chinese/label'
+path = '/root/cn_ocr/chinese_ocr/ctpn/data/My2015/train_images'
+gt_path = '/root/cn_ocr/chinese_ocr/ctpn/data/My2015/train_gt'
 out_path = 're_image'
 if not os.path.exists(out_path):
     os.makedirs(out_path)
@@ -13,7 +13,7 @@ files.sort()
 #files=files[:100]
 for file in files:
     _, basename = os.path.split(file)
-    if basename.lower().split('.')[-1] not in ['jpg', 'png']:
+    if basename.lower().split('.')[-1] not in ['jpg', 'png', 'jpeg']:
         continue
     stem, ext = os.path.splitext(basename)
     gt_file = os.path.join(gt_path, 'gt_' + stem + '.txt')
@@ -31,7 +31,7 @@ for file in files:
     re_size = re_im.shape
     cv.imwrite(os.path.join(out_path, stem) + '.jpg', re_im)
 
-    with open(gt_file, 'r') as f:
+    with open(gt_file, 'r', encoding='utf-8-sig') as f:
         lines = f.readlines()
     for line in lines:
         splitted_line = line.strip().lower().split(',')

@@ -204,7 +204,7 @@ def get_data_layer(roidb, num_classes):
         if cfg.IS_MULTISCALE:
             # obsolete
             # layer = GtDataLayer(roidb)
-            raise "Calling caffe modules..."
+            raise Exception("Calling caffe modules...")
         else:
             layer = RoIDataLayer(roidb, num_classes)
     else:

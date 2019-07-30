@@ -23,5 +23,5 @@ RUN chmod +x setup.sh \
 
 
 EXPOSE 22
-ENTRYPOINT ["/bin/bash", "${OCR_ROOT_DIR}/startssh.sh"]
+ENTRYPOINT ["/bin/bash", "/root/cn_ocr/startssh.sh"]
 CMD ["/bin/bash"]
